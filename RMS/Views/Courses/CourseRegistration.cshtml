@@ -1,0 +1,45 @@
+﻿@model RMS.Models.CourseViewModel
+
+@{
+    ViewData["Title"] = "CourseRegistration";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>CourseRegistration</h1>
+
+<h4>CourseViewModel</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="CourseRegistration" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="CourseName" class="control-label"></label>
+                <input asp-for="CourseName" class="form-control" />
+                <span asp-validation-for="CourseName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CourseFee" class="control-label"></label>
+                <input asp-for="CourseFee" class="form-control" />
+                <span asp-validation-for="CourseFee" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UploadPdf" class="control-label"></label>
+                <input asp-for="UploadPdf" type="file" class="form-control" />
+                <span asp-validation-for="CourseName" class="text-danger"></span>
+            </div>
+            <br />
+            <div class="form-group">
+                <input type="submit" value="Register Course" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

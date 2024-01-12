@@ -1,0 +1,86 @@
+﻿@model RMS.Models.StudentViewModel
+
+@{
+    ViewData["Title"] = "StudentRegistration";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Student Registration</h1>
+
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="StudentRegistration" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="StudentName" class="control-label"></label>
+                <input asp-for="StudentName" class="form-control" />
+                <span asp-validation-for="StudentName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Parentage" class="control-label"></label>
+                <input asp-for="Parentage" class="form-control" />
+                <span asp-validation-for="Parentage" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="StudentAge" class="control-label"></label>
+                <input asp-for="StudentAge" class="form-control" />
+                <span asp-validation-for="StudentAge" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="StudentEmail" class="control-label"></label>
+                <input asp-for="StudentEmail" class="form-control" />
+                <span asp-validation-for="StudentEmail" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="StudentPhone" class="control-label"></label>
+                <input asp-for="StudentPhone" class="form-control" />
+                <span asp-validation-for="StudentPhone" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Adhaar" class="control-label"></label>
+                <input asp-for="Adhaar" class="form-control" />
+                <span asp-validation-for="Adhaar" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DOB" class="control-label"></label>
+                <input asp-for="DOB" class="form-control" />
+                <span asp-validation-for="DOB" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Course" class="control-label"></label>
+                <select asp-for="Course" class="form-control" asp-items="ViewBag.Course">
+                    <option disabled selected>Choose Course</option>
+                    @if (ViewBag.data != null)
+                    {
+                        @foreach (var item in ViewBag.data)
+                        {
+                            <option value="@item.CourseId">@item.CourseName</option>
+                        }
+                    }
+                </select>
+                <span asp-validation-for="Course" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="StudentPhoto" class="control-label"></label>
+                <input asp-for="StudentPhoto" type="file" class="form-control" />
+                <span asp-validation-for="StudentPhoto" class="text-danger"></span>
+            </div>
+            <br />
+            <div class="form-group">
+                <input type="submit" value="Register Student" class="btn btn-primary" />
+            </div>
+        </form>
+        
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

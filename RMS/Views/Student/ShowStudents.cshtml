@@ -1,0 +1,45 @@
+﻿@model IEnumerable<Student>
+
+@{
+    ViewData["Title"] = "Student List";
+}
+
+<div class="container mt-5">
+    <div class="row">
+        @foreach (var student in Model)
+        {
+            <div class="col-md-4">
+                <div class="card" style="width: 18rem;">
+                    <img class="card-img-top" src="/images/@Url.Content(student.StudentPhoto)" alt="Student Photo" asp-append-version="true">
+                    <div class="card-body">
+                        <h5 class="card-title">@student.StudentName</h5>
+                        @* <p class="card-text">
+                            <strong>Father Name:</strong> @student.Parentage<br>
+                            <strong>Age:</strong> @student.StudentAge<br>
+                            <strong>Email:</strong> @student.StudentEmail<br>
+                            <strong>Phone:</strong> @student.StudentPhone<br>
+                            <strong>Adhaar:</strong> @student.Adhaar<br>
+                            <strong>Date of Birth:</strong> @student.DOB.ToShortDateString()<br>
+                            <strong>Course:</strong> @student.CourseList.CourseName
+                        </p> *@
+                        <!-- Add more details as needed -->
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group">
+                              
+
+                                @* <button class="btn btn-sm btn-outline-secondary" >
+                                    @Html.ActionLink("View Details", "GetSingleStudent", new {  id=student.StudentId })
+                                </button> *@
+
+                                <a class="btn btn-primary" asp-action="GetSingleStudent" asp-controller="Student" asp-route-id="@student.StudentId">View Details</a>
+                            
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+

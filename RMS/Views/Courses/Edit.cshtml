@@ -1,0 +1,59 @@
+﻿@model RMS.Models.CourseViewEdit
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Edit</h1>
+
+@* <h4>CourseViewEdit</h4> *@
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="CourseId" />
+            <div class="form-group">
+                <label asp-for="CourseName" class="control-label"></label>
+                <input asp-for="CourseName" class="form-control" />
+                <span asp-validation-for="CourseName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CourseFee" class="control-label"></label>
+                <input asp-for="CourseFee" class="form-control" />
+                <span asp-validation-for="CourseFee" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="CoursePdf" class="control-label"></label>
+                @if (!string.IsNullOrEmpty(Model.CoursePdf))
+                {
+                    <div>
+                        <h4>Course PDF</h4>
+                        <embed src="@Url.Content($"~/PdfFolder/{Model.CoursePdf}")" width="250" height="300" type="application/pdf">
+                        <!-- Hidden field for existing CoursePdf value -->
+                        <input type="hidden" asp-for="CoursePdf" />
+                    </div>
+                }
+                <br />
+                <label>Or Upload New Pdf</label>
+                <!-- Use the same name for model binding -->
+                <input type="file" name="newPdf" class="form-control" />
+                <span asp-validation-for="CoursePdf" class="text-danger"></span>
+            </div>
+            <br />
+            <div class="form-group">
+                <input type="submit" value="Update Course" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="ShowStudent">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

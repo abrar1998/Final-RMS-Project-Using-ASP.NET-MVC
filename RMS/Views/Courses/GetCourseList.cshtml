@@ -1,0 +1,63 @@
+﻿@model IEnumerable<RMS.Models.Course>
+
+@{
+    ViewData["Title"] = "GetCourseList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>GetCourseList</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CourseId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CourseName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CourseFee)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CoursePdf)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CourseId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CourseName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CourseFee)
+                </td>
+                <td>
+                    @* @Html.DisplayFor(modelItem => item.CoursePdf) *@
+                    @if (!string.IsNullOrEmpty(item.CoursePdf))
+                    {
+                        <a href="@Url.Action("DownloadPdf", "Courses", new { courseId = item.CourseId })">Download PDF</a>
+                    }
+                    else
+                    {
+                        <span>No PDF available</span>
+                    }
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.CourseId }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.CourseId }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.CourseId })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
